@@ -1,1 +1,1 @@
-# liquid-glass-react
+# liquid-glass-vue
