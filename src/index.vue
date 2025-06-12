@@ -1,27 +1,35 @@
 <script setup lang="ts">
-// @ts-ignore
 import { ref } from "vue";
 import { displacementMap } from "./utils";
-
-const id = "id" + Date.now();
-const aberrationIntensity = 2;
-const displacementScale = 100;
-const saturation = 140;
-const overLight = false;
-const blurAmount = 0.5;
+const props = defineProps<{
+  style?: Record<string, string> | string;
+  aberrationIntensity?: number;
+  displacementScale?: number;
+  saturation?: number;
+  overLight?: boolean;
+  blurAmount?: number;
+}>();
+const {
+  style,
+  aberrationIntensity = 2,
+  displacementScale = 100,
+  saturation = 140,
+  overLight = false,
+  blurAmount=0.5
+} = props;
+const id = ref("id" + Date.now());
 </script>
 
 <template>
-  <div
-    class="w-[300px] h-[300px] position-fixed rounded-[30px] overflow-hidden transition-all duration-200 ease-in-out"
-    style="
-      top: calc(50vh - 150px);
-      left: calc(50vw - 150px);
-      box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.25);
-    "
-  >
+  <div class="liquid-glass-container" :style="style">
     <svg
-      :style="{ position: 'absolute', width: '300px', height: '300px' }"
+      :style="{
+        position: 'absolute',
+        inset: '0',
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+      }"
       aria-hidden="true"
     >
       <defs>
@@ -170,7 +178,6 @@ const blurAmount = 0.5;
         </filter>
       </defs>
     </svg>
-
     <span
       :style="{
         filter: `url(#${id})`,
@@ -179,9 +186,23 @@ const blurAmount = 0.5;
         backdropFilter: `blur(${
           (overLight ? 20 : 4) + blurAmount * 32
         }px) saturate(${saturation}%)`,
+        pointerEvents: 'none',
       }"
     >
-      <slot></slot>
     </span>
+    <div class="liquid-glass-content">
+      <slot></slot>
+    </div>
   </div>
 </template>
+<style scoped>
+.liquid-glass-container {
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass-content {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+</style>

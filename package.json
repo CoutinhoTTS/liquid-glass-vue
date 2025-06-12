@@ -22,9 +22,13 @@
   "lint-staged": {
     "*": "eslint --fix"
   },
-  "dependencies": {
+  "devDependencies": {
     "@antfu/eslint-config": "^4.14.1",
     "@types/node": "^24.0.0",
-    "eslint": "^9.28.0"
+    "eslint": "^9.28.0",
+    "vue": "^3.5.16"
+  },
+  "dependencies": {
+    "@vueuse/core": "^13.3.0"
   }
 }
