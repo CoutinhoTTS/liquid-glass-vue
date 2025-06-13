@@ -15,7 +15,7 @@ const {
   displacementScale = 100,
   saturation = 140,
   overLight = false,
-  blurAmount=0.5
+  blurAmount = 0.5,
 } = props;
 const id = ref("id" + Date.now());
 </script>
