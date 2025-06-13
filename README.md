@@ -1,2 +1,2 @@
 # liquid-glass-vue
-[copy project](https://github.com/rdev/liquid-glass-react)
+[copy liquid-glass-react](https://github.com/rdev/liquid-glass-react)
